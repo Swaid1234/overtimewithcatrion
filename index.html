@@ -370,14 +370,14 @@ body::before{
         <div class="fg"><label>رقم الهوية</label><input id="e-id" placeholder="1XXXXXXXXX" maxlength="10"></div>
         <div class="fg"><label>رقم الجوال</label><input id="e-mob" type="tel" placeholder="05XXXXXXXX" maxlength="10"></div>
         <div class="fg"><label>القسم / الإدارة</label><input id="e-dept" placeholder="اسم القسم"></div>
-        <div class="fg"><label>المشرف المسؤول</label>
-          <select id="e-sup"><option value="">-- اختر المشرف --</option></select>
-        </div>
+        <div class="fg"><label>اسم مسؤول الأوفرتايم <span style="color:var(--muted);font-weight:400;font-size:.75rem">(اختياري)</span></label>
+          <input id="e-sup" placeholder="اكتب اسم المسؤول"></div>
+
         <div class="fg"><label>تاريخ الأوفرتايم</label><input id="e-date" type="date"></div>
         <div class="fg"><label>وقت البداية</label><input id="e-st" type="time"></div>
         <div class="fg"><label>وقت النهاية</label><input id="e-et" type="time"></div>
-        <div class="fg full"><label>مسؤول الاوفر تايم/والملاحظات</label>
-          <textarea id="e-reason" placeholder="مسؤول الاوفر تايم /والملاحظات ..."></textarea>
+        <div class="fg full"><label>سبب الأوفرتايم</label>
+          <textarea id="e-reason" placeholder="اذكر سبب طلب العمل الإضافي..."></textarea>
         </div>
       </div>
       <div id="e-err" class="al al-err" style="display:none;margin-top:.75rem"></div>
@@ -682,7 +682,7 @@ function submitEmp(){
   const nm=val('e-name'),id=val('e-id'),mob=val('e-mob'),dept=val('e-dept');
   const sid=val('e-sup'),dt=val('e-date'),st=val('e-st'),et=val('e-et'),rs=val('e-reason');
   const el=document.getElementById('e-err');
-  if(!nm||!id||!mob||!dept||!sid||!dt||!st||!et||!rs) return showErr(el,'يرجى ملء جميع الحقول المطلوبة');
+  if(!nm||!id||!mob||!dept||!dt||!st||!et||!rs) return showErr(el,'يرجى ملء جميع الحقول المطلوبة');
   if(!/^[12]\d{9}$/.test(id)) return showErr(el,'رقم الهوية غير صحيح (10 أرقام يبدأ بـ 1 أو 2)');
   if(!/^05\d{8}$/.test(mob)) return showErr(el,'رقم الجوال غير صحيح (يبدأ بـ 05)');
   if(st>=et) return showErr(el,'وقت النهاية يجب أن يكون بعد وقت البداية');
@@ -880,7 +880,7 @@ function openPDF(rid){
         ${row2('وقت البداية',r.startTime,'وقت النهاية',r.endTime)}
         ${row2('عدد الساعات',r.hours+' ساعة','','‎')}
         <tr>
-          <td style="${tdL}">مسؤول الأوفرتايم</td>
+          <td style="${tdL}">سبب الأوفرتايم</td>
           <td colspan="3" style="${tdV}">${r.reason}</td>
         </tr>
       </table>
