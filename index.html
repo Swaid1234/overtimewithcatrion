@@ -370,7 +370,7 @@ body::before{
         <div class="fg"><label>رقم الهوية</label><input id="e-id" placeholder="1XXXXXXXXX" maxlength="10"></div>
         <div class="fg"><label>رقم الجوال</label><input id="e-mob" type="tel" placeholder="05XXXXXXXX" maxlength="10"></div>
         <div class="fg"><label>القسم / الإدارة</label><input id="e-dept" placeholder="اسم القسم"></div>
-        <div class="fg"><label>اسم مسؤول الأوفرتايم <span style="color:var(--muted);font-weight:400;font-size:.75rem"></span></label>
+        <div class="fg"><label>اسم مسؤول الأوفرتايم <span style="color:var(--muted);font-weight:400;font-size:.75rem">(اختياري)</span></label>
           <input id="e-sup" placeholder="اكتب اسم المسؤول"></div>
 
         <div class="fg"><label>تاريخ الأوفرتايم</label><input id="e-date" type="date"></div>
@@ -685,12 +685,13 @@ function submitEmp(){
   if(!nm||!id||!mob||!dept||!dt||!st||!et||!rs) return showErr(el,'يرجى ملء جميع الحقول المطلوبة');
   if(!/^[12]\d{9}$/.test(id)) return showErr(el,'رقم الهوية غير صحيح (10 أرقام يبدأ بـ 1 أو 2)');
   if(!/^05\d{8}$/.test(mob)) return showErr(el,'رقم الجوال غير صحيح (يبدأ بـ 05)');
-  let mins=(eh*60+em)-(sh*60+sm);
-if(mins<=0) mins+=1440;
-const hrs=(mins/60).toFixed(1);
+
   hideErr(el);
   const sup=DB.users().find(s=>s.id===sid);
   const[sh,sm]=st.split(':').map(Number),[eh,em]=et.split(':').map(Number);
+  let mins=(eh*60+em)-(sh*60+sm);
+  if(mins<=0) mins+=1440;
+  const hrs=(mins/60).toFixed(1);
   const req={
     id:'REQ-'+Date.now(),
     employeeName:nm,idNumber:id,mobile:mob,department:dept,
