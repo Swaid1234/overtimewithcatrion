@@ -377,7 +377,7 @@ body::before{
         <div class="fg"><label>وقت البداية</label><input id="e-st" type="time"></div>
         <div class="fg"><label>وقت النهاية</label><input id="e-et" type="time"></div>
         <div class="fg full"><label>سبب الأوفرتايم</label>
-          <textarea id="e-reason" placeholder="اذكر سبب طلب العمل الإضافي..."></textarea>
+          <textarea id="e-reason" placeholder="مسؤول الاوفر تايم ..."></textarea>
         </div>
       </div>
       <div id="e-err" class="al al-err" style="display:none;margin-top:.75rem"></div>
@@ -880,7 +880,7 @@ function openPDF(rid){
         ${row2('وقت البداية',r.startTime,'وقت النهاية',r.endTime)}
         ${row2('عدد الساعات',r.hours+' ساعة','','‎')}
         <tr>
-          <td style="${tdL}">سبب الأوفرتايم</td>
+          <td style="${tdL}">مسؤول الأوفرتايم</td>
           <td colspan="3" style="${tdV}">${r.reason}</td>
         </tr>
       </table>
